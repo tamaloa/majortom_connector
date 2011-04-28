@@ -1,7 +1,8 @@
 module MajortomConnector
   class Connector
     
-    def initialize(id_or_base_iri)
+    def initialize(id_or_base_iri, configuration = Config.new)
+      @config = configuration
       return unless ready?
       config.map_id = id_or_base_iri.match(/^http/) ? find_topic_map_id_by_base_iri(id_or_base_iri) : id_or_base_iri
     end

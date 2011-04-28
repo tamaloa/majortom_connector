@@ -5,8 +5,12 @@ require 'majortom_connector/request'
 
 module MajortomConnector
   
-  def self.connect(id_or_base_iri = "")
-    raise ArgumentError, 'Parameter must not be blank' if id_or_base_iri.blank?
-    connector = Connector.new(id_or_base_iri)
+  def self.connect(configuration = "")
+    return Connector.new(configuration) if configuration.is_a? String
+
+    config = Config.load_server_config_from_file(opts[:config_file]) if opts[:config_file]
+
+
   end
+
 end
