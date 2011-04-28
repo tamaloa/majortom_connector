@@ -4,7 +4,9 @@ module MajortomConnector
     def initialize(id_or_base_iri, configuration = Config.new)
       @config = configuration
       return unless ready?
-      config.map_id = id_or_base_iri.match(/^http/) ? find_topic_map_id_by_base_iri(id_or_base_iri) : id_or_base_iri
+      #until now we use URI to check for valid base_iri ... compliant to standard tmdm we would have to
+      #support any locator notation -> any string
+      config.map_id = id_or_base_iri.match(URI::regexp) ? find_topic_map_id_by_base_iri(id_or_base_iri) : id_or_base_iri
     end
     
     def topic_map_id
